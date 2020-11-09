@@ -1,0 +1,12 @@
+{
+  "name": "@carltonj2000/cli1",
+  "version": "1.0.2",
+  "main": "myCli.js",
+  "bin": {
+    "cli1": "myCli.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "A test CLI published to a npm scope."
+}
