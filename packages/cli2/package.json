@@ -10,6 +10,7 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^3",
+    "enquirer": "^2.3.6",
     "jest": "^26.6.3",
     "jest-diff": "^26.6.2",
     "tslib": "^1"
