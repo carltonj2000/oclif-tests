@@ -2,6 +2,8 @@ import { flags } from "@oclif/command";
 import Base, { debug } from "../base";
 
 const { prompt } = require("enquirer");
+const copy = require("copy-template-dir");
+const path = require("path");
 
 class Cli2 extends Base {
   static description = "describe the command here";
@@ -34,18 +36,24 @@ class Cli2 extends Base {
         flags.name = await prompt({
           type: "input",
           name: "name",
-          message: "What is your name?",
+          message: "What is the folder name?",
         })
           .then(({ name }: { name: string }) => name)
           .catch(console.error)
           .finally(() => console.log("name can also be specified via --name"));
       }
     }
-    const name = flags.name ?? "world 2";
-    this.log(`hello ${name} from ./src/index.ts`);
-    if (args.file && flags.force) {
-      this.log(`you input --force and --file: ${args.file}`);
-    }
+    const name = flags.name;
+
+    const vars = { projectName: name };
+    const inDir = path.resolve(__dirname, "../templates/html");
+    const outDir = path.join(process.cwd(), name);
+
+    copy(inDir, outDir, vars, (err: Error, createdFiles: string[]) => {
+      if (err) throw err;
+      createdFiles.forEach((filePath) => console.log(`Created ${filePath}`));
+      console.log("done!");
+    });
   }
 }
 
