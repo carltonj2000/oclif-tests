@@ -4,6 +4,7 @@ import Base, { debug } from "../base";
 const { prompt } = require("enquirer");
 const copy = require("copy-template-dir");
 const path = require("path");
+const execa = require("execa");
 
 class Cli2 extends Base {
   static description = "describe the command here";
@@ -46,12 +47,15 @@ class Cli2 extends Base {
     const name = flags.name;
 
     const vars = { projectName: name };
-    const inDir = path.resolve(__dirname, "../templates/html");
+    const inDir = path.resolve(__dirname, "../templates/node");
     const outDir = path.join(process.cwd(), name);
 
-    copy(inDir, outDir, vars, (err: Error, createdFiles: string[]) => {
+    copy(inDir, outDir, vars, async (err: Error, createdFiles: string[]) => {
       if (err) throw err;
       createdFiles.forEach((filePath) => console.log(`Created ${filePath}`));
+      process.chdir(outDir);
+      const { stdout } = await execa("yarn", ["install"]);
+      console.log(stdout);
       console.log("done!");
     });
   }
