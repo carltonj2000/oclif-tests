@@ -24,4 +24,4 @@ yarn [un]link --global
 
 ## Oclif
 
-npx oclif single <cli-name />
+npx oclif single `<cli-name />`

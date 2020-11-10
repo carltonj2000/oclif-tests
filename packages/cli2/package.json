@@ -41,7 +41,8 @@
   "license": "MIT",
   "main": "lib/index.js",
   "oclif": {
-    "bin": "cli2"
+    "bin": "cli2",
+    "commands": "./lib/commands"
   },
   "repository": "carltonj2000/cli2",
   "scripts": {
