@@ -25,3 +25,26 @@ yarn [un]link --global
 ## Oclif
 
 npx oclif single `<cli-name />`
+
+## Debug
+
+```bash
+node --inspect-brk ./bin/run init # did not work with vscodium
+DEBUG=* yarn cli2
+DEBUG=cli2* yarn cli2
+```
+
+```javascript title="Use debug instead of console.log"
+var debug = require("debug")("cli2:init");
+```
+
+## Testing
+
+```bash
+yarn add jest
+yarn add -D @oclif/test
+yarn add jest-diff
+yarn add -D @types/jest ts-jest
+# setup jest.config.js and write tests and run with cmd below
+yarn jest # or yarn jest --watch
+```

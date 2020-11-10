@@ -1,4 +1,5 @@
 import { Command, flags } from "@oclif/command";
+var debug = require("debug")("cli2:init");
 
 class Cli2 extends Command {
   static description = "describe the command here";
@@ -22,8 +23,8 @@ class Cli2 extends Command {
 
   async run() {
     const { argv, args, flags } = this.parse(Cli2);
-    console.log("args", args);
-    console.log("argv", argv);
+    debug("args", args);
+    debug("argv", argv);
     const name = flags.name ?? "world 2";
     this.log(`hello ${name} from ./src/index.ts`);
     if (args.file && flags.force) {
