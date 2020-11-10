@@ -48,3 +48,10 @@ yarn add -D @types/jest ts-jest
 # setup jest.config.js and write tests and run with cmd below
 yarn jest # or yarn jest --watch
 ```
+
+### Config Preferences Order
+
+- env vars
+- flags
+- configs
+- stored settings

@@ -10,6 +10,7 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^3",
+    "cosmiconfig": "^7.0.0",
     "enquirer": "^2.3.6",
     "jest": "^26.6.3",
     "jest-diff": "^26.6.2",
@@ -56,5 +57,9 @@
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md"
   },
-  "types": "lib/index.d.ts"
+  "types": "lib/index.d.ts",
+  "cli2": {
+    "bar": 456,
+    "name": "Johnny"
+  }
 }

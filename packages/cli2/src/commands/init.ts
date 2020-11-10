@@ -1,8 +1,9 @@
-import { Command, flags } from "@oclif/command";
-var debug = require("debug")("cli2:init");
+import { flags } from "@oclif/command";
+import Base, { debug } from "../base";
+
 const { prompt } = require("enquirer");
 
-class Cli2 extends Command {
+class Cli2 extends Base {
   static description = "describe the command here";
 
   static flags = {
@@ -27,14 +28,18 @@ class Cli2 extends Command {
     debug("argv", argv);
     debug("flags", flags);
     if (typeof flags.name === "undefined") {
-      flags.name = await prompt({
-        type: "input",
-        name: "name",
-        message: "What is your name?",
-      })
-        .then(({ name }: { name: string }) => name)
-        .catch(console.error)
-        .finally(() => console.log("name can also be specified via --name"));
+      if (this.config && this.config.name) {
+        flags.name = this.config.name;
+      } else {
+        flags.name = await prompt({
+          type: "input",
+          name: "name",
+          message: "What is your name?",
+        })
+          .then(({ name }: { name: string }) => name)
+          .catch(console.error)
+          .finally(() => console.log("name can also be specified via --name"));
+      }
     }
     const name = flags.name ?? "world 2";
     this.log(`hello ${name} from ./src/index.ts`);
