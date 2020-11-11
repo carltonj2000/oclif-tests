@@ -4,7 +4,8 @@ import Base, { debug } from "../base";
 const { prompt } = require("enquirer");
 const copy = require("copy-template-dir");
 const path = require("path");
-const execa = require("execa");
+//const execa = require("execa"); // replaced by spawn
+const { spawn } = require("yarn-or-npm");
 
 class Cli2 extends Base {
   static description = "describe the command here";
@@ -54,7 +55,7 @@ class Cli2 extends Base {
       if (err) throw err;
       createdFiles.forEach((filePath) => console.log(`Created ${filePath}`));
       process.chdir(outDir);
-      const { stdout } = await execa("yarn", ["install"]);
+      const { stdout } = await spawn(["install"]);
       console.log(stdout);
       console.log("done!");
     });
