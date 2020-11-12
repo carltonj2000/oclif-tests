@@ -1,6 +1,6 @@
 {
-  "name": "cli2",
-  "version": "0.0.0",
+  "name": "@carltonj2000/cli2",
+  "version": "0.1.0",
   "author": "Carlton Joseph @carltonj2000",
   "bin": {
     "cli2": "./bin/run"
@@ -17,6 +17,7 @@
     "jest": "^26.6.3",
     "jest-diff": "^26.6.2",
     "tslib": "^1",
+    "update-notifier": "^5.0.1",
     "yarn-or-npm": "^3.0.1"
   },
   "devDependencies": {

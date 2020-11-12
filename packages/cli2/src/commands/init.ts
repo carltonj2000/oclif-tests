@@ -56,7 +56,7 @@ class Cli2 extends Base {
       createdFiles.forEach((filePath) => console.log(`Created ${filePath}`));
       process.chdir(outDir);
       const { stdout } = await spawn(["install"]);
-      console.log(stdout);
+      //console.log(stdout);
       console.log("done!");
     });
   }
