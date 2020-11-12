@@ -6,6 +6,8 @@ const copy = require("copy-template-dir");
 const path = require("path");
 //const execa = require("execa"); // replaced by spawn
 const { spawn } = require("yarn-or-npm");
+const chalk = require("chalk");
+const ora = require("ora");
 
 class Cli2 extends Base {
   static description = "describe the command here";
@@ -38,11 +40,15 @@ class Cli2 extends Base {
         flags.name = await prompt({
           type: "input",
           name: "name",
-          message: "What is the folder name?",
+          message: `What is the folder ${chalk.blue("name")}?`,
         })
           .then(({ name }: { name: string }) => name)
           .catch(console.error)
-          .finally(() => console.log("name can also be specified via --name"));
+          .finally(() =>
+            console.log(
+              `name can also be specified via ${chalk.yellow("--name")}`
+            )
+          );
       }
     }
     const name = flags.name;
@@ -53,11 +59,11 @@ class Cli2 extends Base {
 
     copy(inDir, outDir, vars, async (err: Error, createdFiles: string[]) => {
       if (err) throw err;
+      const spinner = ora({ text: "Installing\n", spinner: "smiley" }).start();
       createdFiles.forEach((filePath) => console.log(`Created ${filePath}`));
       process.chdir(outDir);
-      const { stdout } = await spawn(["install"]);
-      //console.log(stdout);
-      console.log("done!");
+      const child = await spawn(["install"]);
+      child.on("close", () => spinner.succeed());
     });
   }
 }
