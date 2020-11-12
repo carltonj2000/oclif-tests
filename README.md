@@ -4,6 +4,10 @@ The code in this repository is based on the
 [Build Custom Command Line Interface (CLI) Tooling with oclif and TypeScript](https://egghead.io/courses/build-custom-command-line-interface-cli-tooling-with-oclif-and-typescript)
 course.
 
+Did not get
+[update-notifier](https://github.com/yeoman/update-notifier)
+working.
+
 ## Yarn Workspace
 
 - `packages` contains directories with your packages
