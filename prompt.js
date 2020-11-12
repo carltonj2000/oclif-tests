@@ -2,8 +2,9 @@
 
 const { prompt } = require("enquirer");
 const fs = require("fs");
-
-let isat;
+const Conf = require("conf");
+const config = new Conf();
+console.log({ configPath: config.path });
 
 const prmpt = {
   type: "input",
@@ -11,22 +12,14 @@ const prmpt = {
   message: "Where is Harvey Dent?",
 };
 
-const fn = "promptHistory.json";
-if (fs.existsSync(fn)) {
-  const isatStr = fs.readFileSync(fn).toString();
-  const json = JSON.parse(isatStr);
-  isat = json.name;
-}
-
+const isat = config.get("name");
 if (isat) {
   prmpt.message = `If Harvy Dent is not at ${isat} enter the new location.`;
 }
 
 prompt(prmpt)
   .then((result) => {
-    if (result.name) {
-      fs.writeFileSync(fn, JSON.stringify(result));
-    }
+    if (result.name) config.set("name", result.name);
     return result;
   })
   .then(console.log)
